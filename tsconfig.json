@@ -1,0 +1,16 @@
+{
+  "include": ["src/**/*.ts", "src-2/**/*.ts"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "lib": ["ES2020"],
+    "target": "ES2020",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "rootDir": ".",
+    "skipLibCheck": true
+  }
+}
