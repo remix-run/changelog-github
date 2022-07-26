@@ -1,0 +1,35 @@
+name: 🧪 Test
+
+on:
+  push:
+    branches:
+      - dev
+    paths-ignore:
+      - ".github/workflows/release.yml"
+      - "**/*.md"
+  pull_request:
+    paths-ignore:
+      - ".github/workflows/release.yml"
+      - "**/*.md"
+
+jobs:
+  test:
+    name: "🧪 Test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - name: 📥 Install deps
+        run: npm ci
+
+      - name: 🧪 Run Primary Tests
+        run: "npm run test"
