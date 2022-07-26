@@ -1,5 +1,17 @@
 # @remix-run/changelog-github
 
+## 0.1.0
+
+### Minor Changes
+
+- Abitrary minor change ([`ed89421`](https://github.com/remix-run/changelog-github/commit/ed8942113f70e00cc708ea4bebdf4949f0a5dd32))
+
+### Patch Changes
+
+- Arbitrary fake change #1 ([`f3b2900`](https://github.com/remix-run/changelog-github/commit/f3b2900a3dcfd9f3ec7713edd2d991cd21d0450f))
+- Fix excess line endings ([`8e4fef3`](https://github.com/remix-run/changelog-github/commit/8e4fef346fc3457507ff51c2743f93f70e776742))
+- Remove extra newline between changes in the same category ([`026cc01`](https://github.com/remix-run/changelog-github/commit/026cc010696172d125fb21c5093383afc128cf7f))
+
 ## 0.0.3
 
 ### Patch Changes
