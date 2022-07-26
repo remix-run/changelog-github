@@ -1,3 +1,4 @@
+// Just a lil comment
 import { ChangelogFunctions } from "@changesets/types";
 import { config } from "dotenv";
 import { getInfo, getInfoFromPullRequest } from "@changesets/get-github-info";
