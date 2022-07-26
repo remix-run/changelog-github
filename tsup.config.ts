@@ -1,6 +1,7 @@
 import { defineConfig } from "tsup";
+import type { Options } from "tsup";
 
-const config = defineConfig([
+export const configOptions: Options[] = [
   // cjs
   {
     entry: ["src/changelog-github.ts"],
@@ -15,6 +16,8 @@ const config = defineConfig([
     format: "esm",
     sourcemap: true,
   },
-]);
+];
+
+const config = defineConfig(configOptions);
 
 export default config;
