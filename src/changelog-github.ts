@@ -48,31 +48,37 @@ const changelogFunctions: ChangelogFunctions = {
       .split("\n")
       .map((l) => l.trimRight());
 
-    let { pull } = await (async () => {
-      if (prFromSummary !== undefined) {
+    let { pull, commit } = await (async () => {
+      if (prFromSummary != null) {
         let {
-          links: { pull },
+          links: { pull, commit },
         } = await getInfoFromPullRequest({
           repo: options.repo,
           pull: prFromSummary,
         });
-        return { pull };
+        return { pull, commit };
       }
       let commitToFetchFrom = commitFromSummary || changeset.commit;
       if (commitToFetchFrom) {
         let {
-          links: { pull },
+          links: { pull, commit },
         } = await getInfo({
           repo: options.repo,
           commit: commitToFetchFrom,
         });
-        return { pull };
+        return { pull, commit };
       }
-      return { pull: null };
+      return { pull: null, commit: null };
     })();
 
-    let postfix = pull == null ? "" : ` (${pull})`;
-    return `\n\n- ${firstLine + (postfix ? postfix : "")}\n${futureLines
+    let postfix: string = "";
+    if (pull != null) {
+      postfix = ` (${pull})`;
+    } else if (commit != null) {
+      postfix = ` (${commit})`;
+    }
+
+    return `\n\n- ${firstLine + postfix}\n${futureLines
       .map((l) => `  ${l}`)
       .join("\n")}`;
   },
