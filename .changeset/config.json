@@ -1,0 +1,12 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.1.0/schema.json",
+  "changelog": [
+    "@remix-run/changelog-github",
+    { "repo": "remix-run/changelog-github" }
+  ],
+  "commit": false,
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}
