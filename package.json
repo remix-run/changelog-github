@@ -1,6 +1,6 @@
 {
   "name": "@remix-run/changelog-github",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A changelog entry generator for GitHub that links to commits, PRs and users",
   "main": "dist/changelog-github.js",
   "module": "dist/changelog-github.mjs",
