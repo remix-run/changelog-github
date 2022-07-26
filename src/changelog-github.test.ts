@@ -66,7 +66,11 @@ vi.mock(
   }
 );
 
-function getChangeset(content: string, commit: string | undefined) {
+function getChangeset(
+  message: string,
+  content: string,
+  commit: string | undefined
+) {
   return [
     {
       ...parse(
@@ -74,7 +78,7 @@ function getChangeset(content: string, commit: string | undefined) {
   pkg: "minor"
   ---
 
-  something
+  ${message}
   ${content}
   `
       ),
@@ -99,12 +103,13 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
           expect(
             await getReleaseLine(
               ...getChangeset(
+                "something",
                 `${keyword}: ${kind === "with #" ? "#" : ""}${changeData.pull}`,
                 commitFromChangeset
               )
             )
           ).toEqual(
-            `\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))\n`
+            `\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))`
           );
         });
       }
@@ -112,10 +117,14 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
     it("overrides commit with commit keyword", async () => {
       expect(
         await getReleaseLine(
-          ...getChangeset(`commit: ${changeData.commit}`, commitFromChangeset)
+          ...getChangeset(
+            "something",
+            `commit: ${changeData.commit}`,
+            commitFromChangeset
+          )
         )
       ).toEqual(
-        `\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))\n`
+        `\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))`
       );
     });
   }
@@ -125,26 +134,50 @@ test("with multiple authors", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset(
+        "something",
         ["author: @Andarist", "author: @mitchellhamilton"].join("\n"),
         changeData.commit
       )
     )
   ).toMatchInlineSnapshot(`
     "
-    - something ([#1613](https://github.com/remix-run/remix-react/pull/1613))
-    "
+    - something ([#1613](https://github.com/remix-run/remix-react/pull/1613))"
   `);
 });
 
 test("change without a pull release", async () => {
   expect(
     await getReleaseLine(
-      ...getChangeset("author: @chaance", changeDataWithoutPullRequest.commit)
+      ...getChangeset(
+        "something",
+        "author: @chaance",
+        changeDataWithoutPullRequest.commit
+      )
     )
   ).toMatchInlineSnapshot(`
     "
-    - something ([\`b085003\`](https://github.com/remix-run/remix-react/commit/b085003))
+    - something ([\`b085003\`](https://github.com/remix-run/remix-react/commit/b085003))"
+  `);
+});
+
+test("with multiple changesets", async () => {
+  let [line1, line2] = await Promise.all([
+    getReleaseLine(
+      ...getChangeset("something", "author: @Andarist", changeData.commit)
+    ),
+    getReleaseLine(
+      ...getChangeset(
+        "something else",
+        "author: @chaance",
+        changeDataWithoutPullRequest.commit
+      )
+    ),
+  ]);
+
+  expect(line1 + line2).toMatchInlineSnapshot(`
     "
+    - something ([#1613](https://github.com/remix-run/remix-react/pull/1613))
+    - something else ([\`b085003\`](https://github.com/remix-run/remix-react/commit/b085003))"
   `);
 });
 
