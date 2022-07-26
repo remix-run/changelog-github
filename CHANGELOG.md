@@ -1,5 +1,11 @@
 # @remix-run/changelog-github
 
+## 0.0.4
+
+### Patch Changes
+
+- Remove extra newline between changes in the same category ([`026cc01`](https://github.com/remix-run/changelog-github/commit/026cc010696172d125fb21c5093383afc128cf7f))
+
 ## 0.0.3
 
 ### Patch Changes
