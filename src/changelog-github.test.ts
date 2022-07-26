@@ -7,12 +7,11 @@ const getReleaseLine = changelogFunctions.getReleaseLine;
 vi.mock(
   "@changesets/get-github-info",
   (): typeof import("@changesets/get-github-info") => {
-    // this is duplicated because jest.mock reordering things
     const data = {
       commit: "a085003",
       user: "Andarist",
       pull: 1613,
-      repo: "emotion-js/emotion",
+      repo: "remix-run/remix-react",
     };
     const links = {
       user: `[@${data.user}](https://github.com/${data.user})`,
@@ -66,7 +65,7 @@ const data = {
   commit: "a085003",
   user: "Andarist",
   pull: 1613,
-  repo: "emotion-js/emotion",
+  repo: "remix-run/remix-react",
 };
 
 describe.each([data.commit, "wrongcommit", undefined])(
@@ -84,24 +83,24 @@ describe.each([data.commit, "wrongcommit", undefined])(
               )
             )
           ).toEqual(
-            `\n\n- something ([#1613](https://github.com/emotion-js/emotion/pull/1613))\n`
+            `\n\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))\n`
           );
         });
       }
     );
-    test("override commit with commit keyword", async () => {
+    it("overrides commit with commit keyword", async () => {
       expect(
         await getReleaseLine(
           ...getChangeset(`commit: ${data.commit}`, commitFromChangeset)
         )
       ).toEqual(
-        `\n\n- something ([#1613](https://github.com/emotion-js/emotion/pull/1613))\n`
+        `\n\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))\n`
       );
     });
   }
 );
 
-it("with multiple authors", async () => {
+test("with multiple authors", async () => {
   expect(
     await getReleaseLine(
       ...getChangeset(
@@ -112,7 +111,7 @@ it("with multiple authors", async () => {
   ).toMatchInlineSnapshot(`
     "
 
-    - something ([#1613](https://github.com/emotion-js/emotion/pull/1613))
+    - something ([#1613](https://github.com/remix-run/remix-react/pull/1613))
     "
   `);
 });
