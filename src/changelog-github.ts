@@ -46,7 +46,7 @@ const changelogFunctions: ChangelogFunctions = {
 
     let [firstLine, ...futureLines] = replacedChangelog
       .split("\n")
-      .map((l) => l.trimRight());
+      .map((l) => l.trimEnd());
 
     let { pull, commit } = await (async () => {
       if (prFromSummary != null) {
@@ -78,9 +78,12 @@ const changelogFunctions: ChangelogFunctions = {
       postfix = ` (${commit})`;
     }
 
-    return `\n- ${firstLine + postfix}\n${futureLines
-      .map((l) => `  ${l}`)
-      .join("\n")}`;
+    let lines = [
+      `- ${firstLine}${postfix}`,
+      ...futureLines.map((l) => `  ${l}`.trimEnd()),
+    ];
+
+    return lines.join("\n");
   },
 };
 
