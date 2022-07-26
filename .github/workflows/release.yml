@@ -2,6 +2,7 @@ name: 🦋 Changesets Release
 on:
   push:
     branches:
+      - main
       - release
       - "release-*"
 
