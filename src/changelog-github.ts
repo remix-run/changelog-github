@@ -78,7 +78,7 @@ const changelogFunctions: ChangelogFunctions = {
       postfix = ` (${commit})`;
     }
 
-    return `\n\n- ${firstLine + postfix}\n${futureLines
+    return `\n- ${firstLine + postfix}\n${futureLines
       .map((l) => `  ${l}`)
       .join("\n")}`;
   },

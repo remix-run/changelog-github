@@ -104,7 +104,7 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
               )
             )
           ).toEqual(
-            `\n\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))\n`
+            `\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))\n`
           );
         });
       }
@@ -115,7 +115,7 @@ describe.each([changeData.commit, "wrongcommit", undefined])(
           ...getChangeset(`commit: ${changeData.commit}`, commitFromChangeset)
         )
       ).toEqual(
-        `\n\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))\n`
+        `\n- something ([#1613](https://github.com/remix-run/remix-react/pull/1613))\n`
       );
     });
   }
@@ -131,7 +131,6 @@ test("with multiple authors", async () => {
     )
   ).toMatchInlineSnapshot(`
     "
-
     - something ([#1613](https://github.com/remix-run/remix-react/pull/1613))
     "
   `);
@@ -144,7 +143,6 @@ test("change without a pull release", async () => {
     )
   ).toMatchInlineSnapshot(`
     "
-
     - something ([\`b085003\`](https://github.com/remix-run/remix-react/commit/b085003))
     "
   `);
