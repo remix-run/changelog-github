@@ -1,5 +1,11 @@
 # @remix-run/changelog-github
 
+## 0.0.5
+
+### Patch Changes
+
+- Remove postinstall script ([`24e007b`](https://github.com/remix-run/changelog-github/commit/24e007b41ac598998ff6aefa61ff1b79cac80dc1))
+
 ## 0.0.4
 
 ### Patch Changes
