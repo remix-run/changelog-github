@@ -11,8 +11,8 @@
     "build": "tsup",
     "build:internal": "npm run build -- --config tsup.internal.config.ts && copyfiles ./package.json ./node_modules/@remix-run/changelog-github",
     "changeset": "changeset",
-    "changeset:version": "changeset version",
-    "changeset:release": "npm run build && changeset publish",
+    "changeset:version": "npm run build:internal && changeset version",
+    "changeset:release": "npm run build:internal && npm run build && changeset publish",
     "test": "vitest"
   },
   "dependencies": {
